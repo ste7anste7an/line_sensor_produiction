@@ -21,7 +21,7 @@ By mounting the Line Sensor boards in opposite directions, the emitters of the T
 ## Preparation (set up once)
 
 1. Download [WCHIPTool](https://www.wch-ic.com/downloads/WCHISPTool_Setup_exe.html)
-2. Download firmware for : `CH32_line_sensor_i2c_TU.bin` and `CH32_line_sensor_i2c.bin`
+2. Download firmware from this repository: `CH32_line_sensor_i2c_TU.bin` and `CH32_line_sensor_i2c.bin`
 1. Flash **TU** (test unit — one line-sensor board used for all tests) with `CH32_line_sensor_i2c_TU.bin`
   a. connect TU board with USB to PC
   b. Start WCHISPtool and open  `CH32_line_sensor_i2c_TU.bin`
@@ -30,7 +30,8 @@ By mounting the Line Sensor boards in opposite directions, the emitters of the T
   e. Download the firmware
 3. Flash LMS-ESP32 with `ESP32_line_sensor_test.bin` starting at `0x0` using esptool.
 4. Prepare a 10kOhm resistor connected to two female DuPont cables
-  
+
+  <img width="401" height="530" alt="image" src="https://github.com/user-attachments/assets/d179f15f-a026-424d-b28e-f8d7c65d0a45" />
 
 ## Test procedure for each DUT (device under test)
 
@@ -43,39 +44,37 @@ By mounting the Line Sensor boards in opposite directions, the emitters of the T
 5. Flash firmware `CH32_line_sensor_i2c.bin`
 6. Check first 8 RGB LEDs scanning 3 times in different collors (confirms RGB blue LEDs work)
 7. Press BOOT/CAL button — CALIBRATE LED (9th) should start flashing BLUE and turns GREEN after a few seconds
-8. Disconnect USB
+8. Use a voltage meter to measure the coltage betweenGND and 3V3 on the 2x3 header. The voltage should be 3V3. (voltage regulator and pins 2x3 header work) 
+9. Disconnect USB
 
 
-### setup
+### Test setup
+
+Once both Line Sensor boards are flashed with the DUT and UT firmware, mount both boards mirrored to each other with the sensors pointing towards each other. 
+Use spacers to keep the distance at approx 10mm.
+
+
 
 <img width="399" height="719" alt="image" src="https://github.com/user-attachments/assets/719b527f-22d9-48b5-b40f-0e8fd8cc6fba" />
 
-<img width="388" height="708" alt="image" src="https://github.com/user-attachments/assets/d0b1b04b-ba82-4627-b37a-5666063c32f0" />
+Connect the 10kOhm restister between the TX and RX pins of the 2x3 header\
 
-<img width="398" height="320" alt="image" src="https://github.com/user-attachments/assets/c037cad7-a78e-4df0-9eba-105b650a4adb" />
-
+<p>>
 <img width="388" height="366" alt="image" src="https://github.com/user-attachments/assets/02d6a105-3075-4814-98e7-9d9b0a2f02b1" />
+</p>
 
+<p>
+<img width="388" height="708" alt="image" src="https://github.com/user-attachments/assets/d0b1b04b-ba82-4627-b37a-5666063c32f0" />
+</p>
 
 ### Sensor testing + Qwiic connectors
 
 1. Connect one QWIIC port of DUT to LMS-ESP32 using Qwiic cable
 2. Connect other QWIIC port of DUT to TU using Qwiic cable
-3. Mount DUT mirror opposite to TU as indicated in the picture
+3. Mount DUT mirror opposite to TU as indicated in the picture above
 4. Connect LMS-ESP32 with USB to serial monitor
 5. Press RESET on LMS-ESP32 and log serial output (115200 kbit/s)
-6. First Green LED S1: QWIIC cables OK
-7. Second GreenGreen flashing on all LEDs of DUT — OK (confirms emitters, detectors, and Qwiic are working)
-8. Red flashing on all LEDs of TU — error in test; check serial log output and troubleshoot
-  > **Open:** Should this be TU, DUT, or both?
-
-### 2×3 UART connector test
-
-1. Disconnect Qwiic
-2. Connect 2×3 UART of LMS-ESP32 to 2×3 of DUT (straight flat cable)
-3. On TX high, verify LEDs are on and RX toggles up/down every 20 ms (confirms 2×3 GND, 3V, RX, TX)
-4. Red flashing on all LEDs of TU — error in test; check serial log output and troubleshoot
-
-### Pacakaging
-
-- Ensure jst-sh4 20cm straight included in sku
+6. LED S1: Green -> QWIIC cables OK
+7. LED S2: Green -> TX and RX pins OK on 2x3 header
+8. LED S3: Green -> IR sensors and IR emitter OK for DUT
+  
