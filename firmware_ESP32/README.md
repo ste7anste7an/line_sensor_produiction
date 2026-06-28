@@ -33,8 +33,6 @@ Below is the output of a succesful test
 
 
 [.] Testing GPIO pins
-error write_command 2
-error write_command 2
 [*] Expected result per pin: (0, 1)
 [*] O = OK, L = LOW failed, H = HIGH failed, LH = both failed
 
@@ -54,7 +52,6 @@ error write_command 2
 
 
 
-error write_command 2
 [.] Measuring DUT with IR emitter TU off
 [*] values DUT:  [225, 241, 238, 238, 237, 245, 241, 250]
 [.] Measuring DUT with IR emitter TU on
