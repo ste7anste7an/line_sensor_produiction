@@ -1,5 +1,5 @@
 from time import sleep, ticks_ms, ticks_diff, sleep_ms
-from line_sensor_extended import LineSensorI2C
+from line_sensor import LineSensorI2C
 import lms_esp32
 from machine import Pin, UART
 uart=UART(1,rx=lms_esp32.RX_PIN,tx=lms_esp32.TX_PIN,baudrate=115200)
