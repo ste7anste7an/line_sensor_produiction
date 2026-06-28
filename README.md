@@ -10,6 +10,7 @@ Perform these steps once before testing a batch of DUTs:
 * Flash `ESP32_line_sensor_test.bin` to the **LMS-ESP32v2**.
 * Prepare a **10 kΩ resistor** with two female DuPont connectors.
 * Connect the TU to the LMS-ESP32v2 test setup.
+* Connect the LMS-ESP32v2 to a PC via USB and open a serial terminal.
 
 ### For each DUT
 
@@ -21,12 +22,11 @@ Repeat the following steps for every new Device Under Test (DUT):
 4. Connect one Qwiic connector of the DUT to the LMS-ESP32v2.
 5. Connect the second Qwiic connector of the DUT to the TU.
 6. Connect the **10 kΩ resistor** between the DUT **TX** and **RX** pins.
-7. Connect the LMS-ESP32v2 to a PC via USB and open a serial terminal.
-8. Press **RESET** on the LMS-ESP32v2.
-9. Verify that the DUT LEDs perform a red, green, and blue scan.
-10. Verify that status LEDs **S1**, **S2**, and **S3** all turn green.
-11. If any status LED turns red, the DUT has failed. Begin troubleshooting.
-12. Disconnect the DUT and continue with the next board.
+7. Press **RESET** on the LMS-ESP32v2.
+8. Verify that the DUT LEDs perform a red, green, and blue scan.
+9. Verify that status LEDs **S1**, **S2**, and **S3** all turn green.
+10. If any status LED turns red, the DUT has failed. Begin troubleshooting.
+11. Disconnect the DUT and continue with the next board.
 
 
 ---
