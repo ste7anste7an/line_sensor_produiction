@@ -429,7 +429,7 @@ class LineSensorI2C(BaseLineSensor):
     def version(self):
         """Return firmware version as [major, minor]."""
         self.write_command(self.CMD_GET_VERSION)
-        return self.robust_i2c_readfromm(self.device_addr, 2)
+        return list(self.robust_i2c_readfrom(self.device_addr, 2))
 
     def set_debug(self, debug):
         """Set debug level."""

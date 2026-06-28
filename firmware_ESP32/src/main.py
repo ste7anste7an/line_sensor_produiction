@@ -2,6 +2,10 @@ from time import sleep, ticks_ms, ticks_diff, sleep_ms
 from line_sensor import LineSensorI2C
 import lms_esp32
 from machine import Pin, UART
+from neopixel import NeoPixel
+
+np=NeoPixel(Pin(25),1)
+ALL_OK = True
 uart=UART(1,rx=lms_esp32.RX_PIN,tx=lms_esp32.TX_PIN,baudrate=115200)
 dut = LineSensorI2C(device_addr=0x33, freq=100000)
 tu = LineSensorI2C(device_addr=0x34, freq=100000)
@@ -192,7 +196,7 @@ def measure_avg(dev, nr):
     return vector_div(avg, cnt)
     
 
-PASS_LIMIT = 40
+PASS_LIMIT = 60
 
 
 def _status_marks(values, limit=PASS_LIMIT):
@@ -337,6 +341,8 @@ def test_sensors():
 
 
 OK=True
+np[0]=(0,0,0)
+np.write()
 print("=======================================================\r\n")
 print('[*] Test procedure started\r\n')
 sleep_ms(100)
@@ -348,17 +354,32 @@ if check_i2c():
     dut.neopixel(0,0,40,0)
     print("\r\n\r\n")
     OK = test_gpio_report()
+    ALL_OK = ALL_OK & OK
     if OK:
         dut.neopixel(1,0,40,0)
     else:
         dut.neopixel(1,40,0,0)
     print("\r\n\r\n")
     OK = test_sensors()
+    ALL_OK = ALL_OK & OK
     #dut.led_mode(dut.LEDS_OFF)
     if OK:
         dut.neopixel(2,0,40,0)
     else:
         dut.neopixel(2,40,0,0)
+    if ALL_OK:
+        np[0]=(0,50,0)
+        np.write()
+    else:
+        np[0]=(50,0,0)
+        np.write()
     print("\r\n=======================================================\r\n")
 else:
     print("[!] Test aborted")
+    while 1:
+        np[0]=(50,0,0)
+        np.write()
+        sleep_ms(300)
+        np[0]=(0,0,0)
+        np.write()
+        sleep_ms(300)
