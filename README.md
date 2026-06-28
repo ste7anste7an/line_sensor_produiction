@@ -25,7 +25,7 @@ Repeat the following steps for every new Device Under Test (DUT):
 7. Press **RESET** on the LMS-ESP32v2.
 8. Verify that the DUT LEDs perform a red, green, and blue scan.
 9. Verify that status LEDs **S1**, **S2**, and **S3** all turn green.
-10. If any status LED turns red, the DUT has failed. Begin troubleshooting.
+10. If any status LED turns red, or no LEDS are lit after a few seconds, the DUT has failed. Begin troubleshooting.
 11. Disconnect the DUT and continue with the next board.
 
 
