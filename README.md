@@ -14,9 +14,9 @@ The tests confirm that these components are properlyworking:
   - detectors
 
 ## General overview test
-The test will be performed by a firmware residing on the LMS-ESP32v2. This MCU communicates through I2C with two Line Sensor boards. One Line Sensor board, called the Test Unit (**TU**), will be used in all tests. 
+The test will be performed by a firmware residing on the LMS-ESP32v2. The ESP32 communicates through I2C with two Line Sensor boards. One Line Sensor board, called the Test Unit (**TU**), will be used in all tests and has I2C address 0x34. 
 Each test is performed on a Device Under Test (DUT) which is first flash with the production firmware and is then connected with one QWIIC port to the TU and with the other QWIIC port to the LMS-ESP32. 
-By mounting the Line Sensor boards in opposite directions, the emitters of the TU can be used to test the IR sensors of the DUT and the IR sensors of the TU will be used to test the IR emitters of the DUT.
+By mounting the two Line Sensor boards (DUT and TU) in opposite directions, the emitters of the TU can be used to test the IR sensors of the DUT and the IR sensors of the TU will be used to test the IR emitters of the DUT.
 
 ## Preparation (set up once)
 
